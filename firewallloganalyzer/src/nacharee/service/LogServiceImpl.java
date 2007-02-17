@@ -6,7 +6,9 @@ package nacharee.service;
 import java.util.List;
 
 import nacharee.dao.LogManager;
-import nacharee.model.LogView;
+import nacharee.model.EventOverviewLog;
+import nacharee.model.Log;
+import de.laures.cewolf.DatasetProducer;
 
 /**
  * @author Administrator
@@ -27,11 +29,20 @@ public class LogServiceImpl implements LogService {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see nacharee.service.LogService#getLogViewByLogFileName(java.lang.String)
-	 */
-	public LogView getLogViewByLogFileName(String logFileName) {
+	public DatasetProducer getEventOverviewByLogFileName(String logFileName) {
 		// TODO Auto-generated method stub
+		
+		List<Log> logs = logManager.findLogsByLogFileName("");
+		DatasetProducer producer = new EventOverviewLog();
+		
+		return producer;
+	}
+
+	public DatasetProducer getTrafficOverviewByLogFileName(String logFileName) {
+		// TODO Auto-generated method stub
+		
+		List<Log> logs = logManager.findLogsByLogFileName("");
+		
 		return null;
 	}
 

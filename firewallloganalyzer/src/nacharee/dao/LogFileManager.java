@@ -3,6 +3,8 @@
  */
 package nacharee.dao;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import nacharee.model.Log;
@@ -12,13 +14,30 @@ import nacharee.model.Log;
  *
  */
 public class LogFileManager implements LogManager {
+	
+	private String logPath;
+	
+	public void setLogPath(String logPath) {
+		this.logPath = logPath;
+	}
 
 	/* (non-Javadoc)
 	 * @see nacharee.dao.LogManager#findAllLogFileName()
 	 */
 	public List<String> findAllLogFileName() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		File root = new File(logPath);
+		List<String> logFiles = new ArrayList<String>();
+		
+		if( root.isDirectory() ) {
+			String[] files = root.list();
+			for(String logFile : files) {
+				logFiles.add( logFile );
+			}
+		}
+		
+		return logFiles;
 	}
 
 	/* (non-Javadoc)
@@ -26,7 +45,11 @@ public class LogFileManager implements LogManager {
 	 */
 	public List<Log> findLogsByLogFileName(String logFileName) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Log> logs = new ArrayList<Log>();
+		
+		
+		
+		return logs;
 	}
 
 }

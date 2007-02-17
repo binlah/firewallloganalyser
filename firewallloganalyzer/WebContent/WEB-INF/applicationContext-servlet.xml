@@ -33,11 +33,31 @@
 	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
+				<prop key="/traffic.htm">mainController</prop>
+				<prop key="/event.htm">mainController</prop>
 			</props>
 		</property>
 	</bean>
 	
 	<!-- ========================= CONTROLLER DEFINITIONS ========================= -->
 	
-	
+	<bean id="mainController" class="nacharee.web.MainController">
+		<property name="methodNameResolver" ref="mainControllerResolver"/>
+		<property name="logService" ref="logService"/>
+	</bean>
+
+	<!--
+	  - This bean is a MethodNameResolver definition for a MultiActionController.
+	  - It maps URLs to methods for the "clinicController" bean.
+	  -->
+	<bean id="mainControllerResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/traffic.htm">trafficOverviewHandler</prop>
+				<prop key="/event.htm">eventOverviewHandler</prop>
+			</props>
+		</property>
+	</bean>
+
+
 </beans>
