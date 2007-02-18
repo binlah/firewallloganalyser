@@ -2,20 +2,22 @@
 
 <html>
 <body>
-<h1>Page View Statistics</h1>
+<jsp:include flush="true" page="head.jsp" />
+<hr>
+<h1>Event Overview</h1>
 <hr>
 <cewolf:chart 
     id="bar" 
-    title="Page View Statistics" 
+    title="Event Overview" 
     type="verticalbar" 
-    xaxislabel="Page" 
-    yaxislabel="Views">
+    xaxislabel="Device" 
+    yaxislabel="Events">
     <cewolf:data>
         <cewolf:producer id="event"/>
     </cewolf:data>
 </cewolf:chart>
 <p>
-<cewolf:img chartid="bar" renderer="cewolf" width="400" height="300"/>
+<cewolf:img chartid="bar" renderer="cewolf" width="500" height="400"/>
 </P>
 </body>
 </html>

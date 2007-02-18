@@ -38,9 +38,11 @@ public class LogFileManager implements LogManager {
 		List<String> logFiles = new ArrayList<String>();
 
 		if( root.isDirectory() ) {
-			String[] files = root.list();
-			for(String logFile : files) {
-				logFiles.add( logFile );
+			File[] files = root.listFiles();
+			for(File logFile : files) {
+				if( logFile.isFile() ) {
+					logFiles.add( logFile.getName() );
+				}
 			}
 		}
 
