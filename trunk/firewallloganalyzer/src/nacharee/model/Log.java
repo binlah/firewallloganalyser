@@ -6,11 +6,15 @@ package nacharee.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author Administrator
  *
  */
 public class Log implements Serializable {
+	
+	private static Logger logger = Logger.getLogger( Log.class );
 
 	private static final long serialVersionUID = 5216197920998930113L;
 
@@ -264,10 +268,22 @@ public class Log implements Serializable {
 	}
 	
 	
-	// ----------------  biz method
+	// ----------------  biz method ----------------
 	public String replaceSpaces(String log) {
 		
-		log = log.replaceAll("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] ", "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]_");
+//		log = log.replaceAll("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] ", "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]_");
+		int startQuote = log.indexOf("\"");
+		int endQuote = log.indexOf("\"", startQuote+1);
+		logger.debug(" startQuote = " + startQuote);
+		logger.debug(" endQuote = " + endQuote);
+		
+		String startTime = log.substring(startQuote, endQuote+1);
+		logger.debug("start_time = " + startTime);
+		
+		String newStartTime = startTime.replaceAll(" ", "_");
+		logger.debug("new start_time = " + newStartTime);
+		
+		log = log.replace(startTime, newStartTime);
 		log = log.replace("src zone", "src_zone");
 		log = log.replace("dst zone", "dst_zone");
 		log = log.replace("src port", "src_port");
@@ -276,5 +292,9 @@ public class Log implements Serializable {
 		log = log.replace("dst-xlated ip", "dst-xlated_ip");
 		
 		return log;
+	}
+	
+	public void init(String log) {
+		
 	}
 }
