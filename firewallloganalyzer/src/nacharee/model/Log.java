@@ -4,6 +4,7 @@
 package nacharee.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -15,6 +16,8 @@ import org.apache.log4j.Logger;
 public class Log implements Serializable {
 	
 	private static Logger logger = Logger.getLogger( Log.class );
+	
+	private static Calendar calendar = Calendar.getInstance();
 
 	private static final long serialVersionUID = 5216197920998930113L;
 
@@ -295,6 +298,32 @@ public class Log implements Serializable {
 	}
 	
 	public void init(String log) {
+		String[] metaData = log.split("\t");
+		assert metaData.length==4;
+//		logger.debug("metadata size = " + metaData.length);
 		
+		String[] logData = metaData[3].split(" ");
+		assert logData.length==29;
+//		logger.debug("log size = " + logData.length);
+		
+		
+		// set security type
+		if( logData[4].indexOf( SecurityLevel.EMERGENCY.getDescription())>0) {
+			this.securityLevel = SecurityLevel.EMERGENCY;
+		} else if( logData[4].indexOf( SecurityLevel.ALERT.getDescription())>0) {
+			this.securityLevel = SecurityLevel.ALERT;
+		} else if( logData[4].indexOf( SecurityLevel.CRITICAL.getDescription())>0) {
+			this.securityLevel = SecurityLevel.CRITICAL;
+		} else if( logData[4].indexOf( SecurityLevel.ERROR.getDescription())>0) {
+			this.securityLevel = SecurityLevel.ERROR;
+		} else if( logData[4].indexOf( SecurityLevel.WARNING.getDescription())>0) {
+			this.securityLevel = SecurityLevel.WARNING;
+		} else if( logData[4].indexOf( SecurityLevel.NOTIFICATION.getDescription())>0) {
+			this.securityLevel = SecurityLevel.NOTIFICATION;
+		} else if( logData[4].indexOf( SecurityLevel.INFORMATION.getDescription())>0) {
+			this.securityLevel = SecurityLevel.INFORMATION;
+		} else if( logData[4].indexOf( SecurityLevel.DEBUG.getDescription())>0) {
+			this.securityLevel = SecurityLevel.DEBUG;
+		}
 	}
 }

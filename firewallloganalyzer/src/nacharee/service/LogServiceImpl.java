@@ -5,6 +5,8 @@ package nacharee.service;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import nacharee.dao.LogManager;
 import nacharee.model.EventOverviewLog;
 import nacharee.model.Log;
@@ -15,6 +17,8 @@ import de.laures.cewolf.DatasetProducer;
  *
  */
 public class LogServiceImpl implements LogService {
+	
+	private static Logger logger = Logger.getLogger( LogServiceImpl.class );
 	
 	private LogManager logManager;
 	public void setLogManager(LogManager logManager) {
@@ -32,8 +36,11 @@ public class LogServiceImpl implements LogService {
 	public DatasetProducer getEventOverviewByLogFileName(String logFileName) {
 		// TODO Auto-generated method stub
 		
-		List<Log> logs = logManager.findLogsByLogFileName("");
-		DatasetProducer producer = new EventOverviewLog();
+		List<Log> logs = logManager.findLogsByLogFileName(logFileName);
+		logger.debug("logs size = " + logs.size());
+		
+		EventOverviewLog producer = new EventOverviewLog();
+		producer.setLogs( logs );
 		
 		return producer;
 	}
@@ -41,7 +48,7 @@ public class LogServiceImpl implements LogService {
 	public DatasetProducer getTrafficOverviewByLogFileName(String logFileName) {
 		// TODO Auto-generated method stub
 		
-		List<Log> logs = logManager.findLogsByLogFileName("");
+		List<Log> logs = logManager.findLogsByLogFileName(logFileName);
 		
 		return null;
 	}
