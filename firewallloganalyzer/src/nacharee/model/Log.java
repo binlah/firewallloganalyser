@@ -299,12 +299,19 @@ public class Log implements Serializable {
 	
 	public void init(String log) {
 		String[] metaData = log.split("\t");
-		assert metaData.length==4;
+		if(metaData.length!=4) {
+			throw new RuntimeException("wrong data.");
+		}
 //		logger.debug("metadata size = " + metaData.length);
 		
-		String[] logData = metaData[3].split(" ");
+		String logDataString = metaData[3];
+		
+		//remove space
+//		logDataString = replaceSpaces( logDataString );
+		
+		String[] logData = logDataString.split(" ");
 		assert logData.length==29;
-//		logger.debug("log size = " + logData.length);
+		logger.debug("log size = " + logData.length);
 		
 		
 		// set security type
@@ -325,5 +332,18 @@ public class Log implements Serializable {
 		} else if( logData[4].indexOf( SecurityLevel.DEBUG.getDescription())>0) {
 			this.securityLevel = SecurityLevel.DEBUG;
 		}
+		
+		// set send, receive
+//		int sent = 0;
+//		int receive = 0;
+//		if( this.securityLevel == SecurityLevel.NOTIFICATION) {
+//			sent = Integer.parseInt( logData[13].split("=")[1] );
+//			receive = Integer.parseInt( logData[14].split("=")[1] );
+//		} else {
+//			sent = Integer.parseInt( logData[14].split("=")[1] );
+//			receive = Integer.parseInt( logData[15].split("=")[1] );
+//		}
+//		this.bytesSent = sent;
+//		this.bytesReceive = receive;
 	}
 }

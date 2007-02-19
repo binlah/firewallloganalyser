@@ -4,16 +4,16 @@
 <body>
 <jsp:include flush="true" page="head.jsp" />
 <hr>
-<h1>Page View Statistics</h1>
+<h1>Traffic Overview</h1>
 <hr>
 <cewolf:chart 
     id="bar" 
-    title="Event Overview" 
+    title="Traffic Overview" 
     type="verticalbar" 
     xaxislabel="Device" 
-    yaxislabel="Events">
+    yaxislabel="Total Traffic(MB)">
     <cewolf:data>
-        <cewolf:producer id="event"/>
+        <cewolf:producer id="traffic"/>
     </cewolf:data>
 </cewolf:chart>
 <p>

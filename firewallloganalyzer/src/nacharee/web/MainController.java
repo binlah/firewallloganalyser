@@ -6,7 +6,6 @@ package nacharee.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import nacharee.model.sample.PageViewCountData;
 import nacharee.service.LogService;
 
 import org.springframework.beans.factory.InitializingBean;
@@ -41,17 +40,13 @@ public class MainController extends MultiActionController implements Initializin
 	}
 
 	public ModelAndView trafficOverviewHandler(HttpServletRequest request, HttpServletResponse response) {
-		DatasetProducer datasetProducer = logService.getEventOverviewByLogFileName("sample-logging-on-FW.txt");
+		DatasetProducer datasetProducer = logService.getTrafficOverviewByLogFileName("sample-logging-on-FW.txt");
 		return new ModelAndView().addObject("traffic", datasetProducer);
 	}
 
-	public ModelAndView eventOverviewHandler(HttpServletRequest request, HttpServletResponse response) {
-		
+	public ModelAndView eventOverviewHandler(HttpServletRequest request, HttpServletResponse response) {		
 		DatasetProducer datasetProducer = logService.getEventOverviewByLogFileName("sample-logging-on-FW.txt");
-//		DatasetProducer datasetProducer = new PageViewCountData();
-		
 		return new ModelAndView().addObject("event", datasetProducer);
 	}
-	
 	
 }
