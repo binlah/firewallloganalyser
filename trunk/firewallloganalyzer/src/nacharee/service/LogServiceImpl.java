@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import nacharee.dao.LogManager;
 import nacharee.model.EventOverviewLog;
 import nacharee.model.Log;
+import nacharee.model.TrafficOverviewLog;
 import de.laures.cewolf.DatasetProducer;
 
 /**
@@ -49,8 +50,12 @@ public class LogServiceImpl implements LogService {
 		// TODO Auto-generated method stub
 		
 		List<Log> logs = logManager.findLogsByLogFileName(logFileName);
+		logger.debug("logs size = " + logs.size());
 		
-		return null;
+		TrafficOverviewLog producer = new TrafficOverviewLog();
+		producer.setLogs( logs );
+		
+		return producer;
 	}
 
 }

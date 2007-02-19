@@ -51,7 +51,6 @@ public class EventOverviewLog implements DatasetProducer {
 	 */
 	public Object produceDataset(Map params) throws DatasetProduceException {
 		// TODO Auto-generated method stub
-//		int emergency=0, alert=0, critical=0, error=0, warning=0, notification=0, information=0, debug=0;
 		
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset() {
 			private static final long serialVersionUID = 1177544640186495879L;
@@ -60,7 +59,8 @@ public class EventOverviewLog implements DatasetProducer {
 				logger.debug(this +" finalized.");
 			}
 		};
-		
+
+//		int emergency=0, alert=0, critical=0, error=0, warning=0, notification=0, information=0, debug=0;
 //		for(Log log : logs) {
 //			switch ( log.getSecurityLevel() ) {
 //				case EMERGENCY: emergency++; break;
