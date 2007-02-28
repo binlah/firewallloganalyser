@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean id="logManager" class="nacharee.dao.LogFileManager">
+		<property name="logPath">
+			<value>D:\Project\Project 8 - Firewall Log Analyzer\Source\opensvn\firewallloganalyzer\WebContent\log</value>
+		</property>
+	</bean>
+	
+	<bean id="logService" class="nacharee.service.LogServiceImpl">
+		<property name="logManager" ref="logManager"></property>
+	</bean>
+	
+</beans>
