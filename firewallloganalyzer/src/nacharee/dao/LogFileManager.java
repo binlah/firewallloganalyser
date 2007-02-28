@@ -63,7 +63,7 @@ public class LogFileManager implements LogManager {
 			String line = null;
 			while ((line = in.readLine()) != null) {
 				Log log = new Log();
-				log.init( line );				
+				log.init( line );
 				logs.add( log );
 			}
 			
